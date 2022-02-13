@@ -1,0 +1,56 @@
+Program Monster;
+
+  {$IFDEF FPC}
+    {$MODE Delphi}
+  {$ENDIF}
+  {$APPTYPE CONSOLE}
+  {$R *.res}
+
+  Uses
+    SysUtils,
+    UMonsterClasses in 'UMonsterClasses.pas';
+
+  Var
+    Choice : Integer;
+    MyGame : Game;
+
+  Procedure DisplayMenu;
+  Begin
+    Writeln('MAIN MENU');
+    Writeln;
+    Writeln('1.  Start new game');
+    Writeln('2.  Play training game');
+    Writeln('9.  Quit');
+    Writeln;
+    Write('Please enter your choice: ');
+  End;
+
+  Function GetMainMenuChoice: Integer;
+  Var
+    Choice: Integer;
+  Begin
+    Readln(Choice);
+    Writeln;
+    GetMainMenuChoice := Choice;
+  End;
+
+Begin
+  While Choice <> 9 Do
+  Begin
+    DisplayMenu;
+    Choice := GetMainMenuChoice;
+    Case Choice Of
+      1:
+        Begin
+          MyGame := Game.Create(False);
+          MyGame.Free;
+        End;
+      2:
+        Begin
+          MyGame := Game.Create(True);
+          MyGame.Free;
+        End;
+    End;
+  End;
+End.
+
